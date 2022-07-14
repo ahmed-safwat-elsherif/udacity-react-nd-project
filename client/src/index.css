@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply min-h-[100vh] bg-slate-900 text-white;
+  }
+  input,
+  select {
+    @apply text-black placeholder:italic;
+  }
+}
+
+@layer components {
+  .input-field {
+    @apply rounded-full  px-[20px] py-[5px];
+  }
+  .btn {
+    @apply rounded-full px-[1.5rem] py-[0.3rem] text-center font-bold  transition-all  active:ring-2  active:ring-offset-2 disabled:cursor-not-allowed disabled:ring-0 disabled:ring-offset-0;
+  }
+  .btn-primary {
+    @apply bg-indigo-500 text-white hover:bg-indigo-700 focus-visible:bg-indigo-700 active:bg-indigo-700 active:ring-indigo-700 disabled:bg-indigo-300 disabled:text-indigo-500;
+  }
+  .btn-secondary {
+    @apply bg-teal-600 text-white hover:bg-teal-700 focus-visible:bg-teal-700 active:bg-teal-700 active:ring-teal-700 disabled:bg-teal-300 disabled:text-teal-700;
+  }
+  .btn-info {
+    @apply bg-neutral-600 text-white hover:bg-neutral-700 focus-visible:bg-neutral-700 active:bg-neutral-700 active:ring-neutral-700 disabled:bg-neutral-300 disabled:text-neutral-700;
+  }
+  .font-edu {
+    font-family: 'Edu VIC WA NT Beginner', cursive;
+  }
+  .books-shelf {
+    @apply min-h-[300px] w-[100%] overflow-x-auto;
+  }
+  .nav-link {
+    @apply px-[1.5rem] py-[0.3rem] font-bold  transition-all hover:underline focus-visible:underline;
+  }
+  .books-shelf__title {
+    @apply mt-5 px-2 text-[1.5rem] font-bold;
+  }
+  .overlay-loading {
+    @apply absolute top-0 z-10 flex h-[100%] min-h-[40vh] w-[100%] items-start justify-center rounded-[0.5rem] bg-slate-600 bg-opacity-70;
+  }
+}

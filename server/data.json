@@ -1,0 +1,122 @@
+[
+  {
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/51InjRPaF7L._SX377_BO1,204,203,200_.jpg",
+    "title": "Eloquent JavaScript, Third Edition",
+    "author": "Marijn Haverbeke",
+    "website": "http://eloquentjavascript.net/"
+  },
+  {
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/51LHTs-4ziL._SX331_BO1,204,203,200_.jpg",
+    "title": "Practical Modern JavaScript",
+    "author": "Nicolás Bevacqua",
+    "website": "https://github.com/mjavascript/practical-modern-javascript"
+  },
+  {
+    "imageUrl": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1456191495l/23253178.jpg",
+    "title": "Understanding ECMAScript 6",
+    "author": "Nicholas C. Zakas",
+    "website": "https://leanpub.com/understandinges6/read"
+  },
+  {
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/51rKpcEISfL._SX379_BO1,204,203,200_.jpg",
+    "title": "Speaking JavaScript",
+    "author": "Axel Rauschmayer",
+    "website": "http://speakingjs.com/"
+  },
+  {
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/51H-31ivMTL._SX379_BO1,204,203,200_.jpg",
+    "title": "Learning JavaScript Design Patterns",
+    "author": "Addy Osmani",
+    "website": "http://www.addyosmani.com/resources/essentialjsdesignpatterns/book/"
+  },
+  {
+    "imageUrl": "https://m.media-amazon.com/images/I/410f-bUBR3L.jpg",
+    "title": "You Don't Know JS Yet",
+    "author": "Kyle Simpson",
+    "website": "https://github.com/getify/You-Dont-Know-JS/tree/2nd-ed/get-started"
+  },
+  {
+    "imageUrl": "https://media.springernature.com/full/springer-static/cover-hires/book/978-1-4842-0076-6",
+    "title": "Pro Git",
+    "author": "Scott Chacon and Ben Straub",
+    "website": "https://git-scm.com/book/en/v2"
+  },
+  {
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/41+mbm8o74L._SX348_BO1,204,203,200_.jpg",
+    "title": "Rethinking Productivity in Software Engineering",
+    "author": "Caitlin Sadowski, Thomas Zimmermann",
+    "website": "https://doi.org/10.1007/978-1-4842-4221-6"
+  },
+  {
+    "imageUrl": "https://www.patterns.dev/img/remote/Z29ihHu-640w.avif",
+    "title": "Learning Patterns",
+    "author": "Addy Osmani",
+    "website": "https://www.patterns.dev/"
+  },
+  {
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/716ncWz86UL.jpg",
+    "author": "Charles Dickens",
+    "website": "https://en.wikipedia.org/wiki/Great_Expectations",
+    "title": "Great Expectations"
+  },
+  {
+    "imageUrl": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1386925793l/18212.jpg",
+    "author": "Denis Diderot",
+    "website": "https://en.wikipedia.org/wiki/Jacques_the_Fatalist",
+    "title": "Jacques the Fatalist"
+  },
+  {
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/71F5CqVfOSL.jpg",
+    "author": "Alfred Doblin",
+    "website": "https://en.wikipedia.org/wiki/Berlin_Alexanderplatz",
+    "title": "Berlin Alexanderplatz"
+  },
+  {
+    "imageUrl": "https://kbimages1-a.akamaihd.net/c8f66724-16c7-4e30-ab42-2e205435eb20/1200/1200/False/crime-and-punishment-by-fyodor-dostoyevsky.jpg",
+    "author": "Fyodor Dostoevsky",
+    "website": "https://en.wikipedia.org/wiki/Crime_and_Punishment",
+    "title": "Crime and Punishment"
+  },
+  {
+    "imageUrl": "https://m.media-amazon.com/images/I/41vcir8ILAL.jpg",
+    "author": "Fyodor Dostoevsky",
+    "website": "https://en.wikipedia.org/wiki/The_Idiot",
+    "title": "The Idiot"
+  },
+  {
+    "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/51necgzxDBL._SX323_BO1,204,203,200_.jpg",
+    "author": "Fyodor Dostoevsky",
+    "website": "https://en.wikipedia.org/wiki/Demons_(Dostoyevsky_novel)",
+    "title": "The Possessed"
+  },
+  {
+    "imageUrl": "https://kbimages1-a.akamaihd.net/1208ebc8-3b5d-40ef-ba2d-b5121520d7e2/1200/1200/False/the-brothers-karamazov-135.jpg",
+    "author": "Fyodor Dostoevsky",
+    "website": "https://en.wikipedia.org/wiki/The_Brothers_Karamazov",
+    "title": "The Brothers Karamazov"
+  },
+  {
+    "imageUrl": "",
+    "author": "George Eliot",
+    "website": "https://en.wikipedia.org/wiki/Middlemarch",
+    "title": "Middlemarch"
+  },
+  {
+    "imageUrl": "",
+    "author": "Ralph Ellison",
+    "website": "https://en.wikipedia.org/wiki/Invisible_Man",
+    "title": "Invisible Man"
+  },
+  {
+    "imageUrl": "",
+    "author": "Euripides",
+    "website": "https://en.wikipedia.org/wiki/Medea_(play)",
+    "title": "Medea"
+  },
+  {
+    "imageUrl": "https://kbimages1-a.akamaihd.net/75e51a46-0ea5-418f-9418-8db62e3f7931/1200/1200/False/absalom-absalom-19.jpg",
+    "author": "William Faulkner",
+    "website": "https://en.wikipedia.org/wiki/Absalom,_Absalom!",
+    "title": "Absalom, Absalom!"
+  }
+]

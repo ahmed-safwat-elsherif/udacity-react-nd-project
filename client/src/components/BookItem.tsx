@@ -44,9 +44,7 @@ export const BookItem = ({
         <p className="max-w-[100%] overflow-hidden text-ellipsis whitespace-nowrap text-[0.8rem] italic text-gray-100">
           {!bookInfo.authors?.length
             ? 'Unknown'
-            : bookInfo.authors?.length === 1
-            ? 'by: ' + bookInfo?.authors[0]
-            : 'by: ' + bookInfo?.authors[0] + ' and others'}
+            : 'by: ' + bookInfo?.authors[0] + (bookInfo.authors?.length > 1 ? ' and others' : '')}
         </p>
       </div>
       <div className="absolute bottom-10 -right-5 h-[3rem] w-[3rem] rounded-full bg-teal-800 hover:shadow-md hover:shadow-black">

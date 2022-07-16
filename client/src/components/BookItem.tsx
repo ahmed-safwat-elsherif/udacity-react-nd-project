@@ -19,9 +19,16 @@ export const BookItem = ({
   }, [shelf]);
   return (
     <div className="relative">
-      <Link to={`/book/${bookInfo.id}`}>
+      <Link to={`/book/${bookInfo.id}`} className="relative">
+        {!bookInfo.imageLinks?.smallThumbnail && !bookInfo.imageLinks?.thumbnail && (
+          <div className="absolute top-0 flex w-[100%] justify-center bg-slate-900 bg-opacity-60 ">
+            <span className="inline-block text-center italic">
+              No Image available for this book
+            </span>
+          </div>
+        )}
         <img
-          src={bookInfo.imageLinks.smallThumbnail || bookInfo.imageLinks.thumbnail}
+          src={bookInfo.imageLinks?.smallThumbnail || bookInfo.imageLinks?.thumbnail || ''}
           onError={e => {
             e.currentTarget.src = '/image-thumbnail.jpg';
           }}
@@ -34,8 +41,15 @@ export const BookItem = ({
         <p className="max-w-[80%] overflow-hidden text-ellipsis whitespace-nowrap text-[1.2rem]">
           {bookInfo.title}
         </p>
+        <p className="max-w-[100%] overflow-hidden text-ellipsis whitespace-nowrap text-[0.8rem] italic text-gray-100">
+          {!bookInfo.authors?.length
+            ? 'Unknown'
+            : bookInfo.authors?.length === 1
+            ? 'by: ' + bookInfo?.authors[0]
+            : 'by: ' + bookInfo?.authors[0] + ' and others'}
+        </p>
       </div>
-      <div className="absolute -bottom-5 -right-5 h-[3rem] w-[3rem] rounded-full bg-teal-800 hover:shadow-md hover:shadow-black">
+      <div className="absolute bottom-10 -right-5 h-[3rem] w-[3rem] rounded-full bg-teal-800 hover:shadow-md hover:shadow-black">
         <select
           value={shelf}
           onChange={e =>

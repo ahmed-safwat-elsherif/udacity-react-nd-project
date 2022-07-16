@@ -11,7 +11,7 @@ export const Search = () => {
   const [searchText, setSearchText] = useState('');
   const [books, setBooks] = useState<Book[]>([]);
   const [searchLoading, setSearchLoading] = useState<boolean>(false);
-  const [isNoSearchFound, setIsNoSearchFound] = useState(false);
+  const [isNoSearchFound, setIsNoSearchFound] = useState<boolean>(false);
   const { books: userBooks, updateStatus: updateBookStatus } = useContext(BooksContext);
 
   const updateStatus: UpdateStatusType = useCallback(
@@ -28,7 +28,7 @@ export const Search = () => {
               autoClose: 2000,
             });
           },
-          onError(err) {
+          onError() {
             toast.update(toastId, {
               render: 'Failed to change book status!',
               type: 'error',
@@ -43,48 +43,46 @@ export const Search = () => {
   );
   useEffect(() => {
     setIsNoSearchFound(false);
-    setIsNoSearchFound(false);
-    if (searchText.trim().length) {
-      setSearchLoading(true);
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        searchBooks({ query: searchText, maxResults: 20 })
-          .then(res => {
-            const books = res.data.books;
 
-            if (books.error) return setBooks([]);
+    if (!searchText?.trim()?.length) return;
 
-            if (!books.length) {
-              setBooks([]);
-              setIsNoSearchFound(true);
-              return;
-            }
+    setSearchLoading(true);
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      searchBooks({ query: searchText, maxResults: 20 })
+        .then(res => {
+          const books = res.data.books;
 
-            const userBooksIds = userBooks.map(({ id }) => id);
-
-            const searchedBooks: Book[] = books.map(book => {
-              const idx = userBooksIds.indexOf(book.id);
-              if (idx >= 0) {
-                return userBooks[idx];
-              }
-              return {
-                ...book,
-                shelf: BookShelfEnum.None,
-              };
-            });
-
-            setBooks(searchedBooks);
-          })
-          .catch(() => {
+          if (books?.error) {
             setBooks([]);
-            toast.error('Failed to search books');
             setIsNoSearchFound(true);
-          })
-          .finally(() => {
-            setSearchLoading(false);
+            return;
+          }
+
+          const userBooksIds = userBooks.map(({ id }) => id);
+
+          const searchedBooks: Book[] = books.map(book => {
+            const idx = userBooksIds.indexOf(book.id);
+            if (idx >= 0) {
+              return userBooks[idx];
+            }
+            return {
+              ...book,
+              shelf: BookShelfEnum.None,
+            };
           });
-      }, 1000);
-    }
+
+          setBooks(searchedBooks);
+        })
+        .catch(() => {
+          setBooks([]);
+          toast.error('Failed to search books');
+          setIsNoSearchFound(true);
+        })
+        .finally(() => {
+          setSearchLoading(false);
+        });
+    }, 1000);
   }, [searchText, userBooks]);
 
   return (
@@ -98,7 +96,7 @@ export const Search = () => {
           className="input-field flex-1"
         />
       </div>
-      <div className="relative mx-auto max-w-[90%] sm:max-w-[80%] md:max-w-[70%]">
+      <div className="relative mx-auto mt-[5rem] max-w-[90%] sm:max-w-[80%] md:max-w-[70%]">
         {searchLoading && (
           <div className="overlay-loading">
             <p className="mt-[5rem] rounded-[6px] bg-yellow-700 px-5 text-center text-[1.5rem] text-white">
@@ -117,16 +115,18 @@ export const Search = () => {
             </p>
           </div>
         )}
-        <ul className="flex flex-wrap items-end justify-center">
-          {books.map(book => (
-            <li
-              key={book.id}
-              className="mb-10 mr-10 inline-block min-w-[130px] max-w-[200px] sm:min-w-[160px] md:min-w-[200px]"
-            >
-              <BookItem book={book} onChangeStatus={updateStatus} />
-            </li>
-          ))}
-        </ul>
+        {searchText && (
+          <ul className="flex flex-wrap items-end justify-center">
+            {books.map(book => (
+              <li
+                key={book.id}
+                className="mb-10 mr-10 inline-block min-w-[130px] max-w-[200px] sm:min-w-[160px] md:min-w-[200px]"
+              >
+                <BookItem book={book} onChangeStatus={updateStatus} />
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </section>
   );

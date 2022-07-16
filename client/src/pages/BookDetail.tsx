@@ -14,14 +14,27 @@ export const BookDetail = () => {
   if (error) return <Navigate to="/notfound" />;
 
   if (loading) return <Loading />;
-  const { title, imageLinks, authors, description, previewLink } = book as Book;
+  const {
+    title = 'Unavailable',
+    imageLinks = {} as Book['imageLinks'],
+    authors = [],
+    description = '',
+    previewLink = '',
+  } = book as Book;
   return (
     <div className="relative">
       <div className="mx-5 mt-10 mb-10 flex h-[100%] flex-col items-stretch sm:flex-row md:mx-[5rem]">
         <h3 className="text-bold mb-5 block text-[2rem] sm:hidden">"{title}"</h3>
-        <div className="top-0 mb-4 flex flex-1 flex-col items-start justify-center sm:justify-start">
+        <div className="relative top-0 mb-4 flex flex-1 flex-col items-start justify-center sm:justify-start">
+          {!imageLinks?.smallThumbnail && !imageLinks?.thumbnail && (
+            <div className="absolute top-0 flex w-[60%] min-w-[15rem] justify-center bg-slate-900 bg-opacity-60 ">
+              <span className="inline-block text-center italic">
+                No Image available for this book
+              </span>
+            </div>
+          )}
           <img
-            src={imageLinks.thumbnail || imageLinks.smallThumbnail}
+            src={imageLinks.thumbnail || imageLinks.smallThumbnail || ''}
             onError={e => {
               e.currentTarget.src = '/image-thumbnail.jpg';
             }}
@@ -31,7 +44,7 @@ export const BookDetail = () => {
           />
         </div>
         <div className="flex flex-1 flex-col">
-          <h3 className="text-bold hidden text-[2rem] sm:block">{title}</h3>
+          <h3 className="text-bold hidden text-[2rem] sm:block">"{title}"</h3>
           <hr />
           <h4 className="text-end text-[1.2rem] italic text-gray-300">
             {!authors.length

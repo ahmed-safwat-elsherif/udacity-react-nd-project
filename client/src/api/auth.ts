@@ -37,3 +37,11 @@ export const getUserInfo = () =>
       Authorization: localStorage.getItem(TOKEN) as string,
     },
   });
+
+export const getBookToken = () =>
+  axios.get<any, AxiosResponse<{ bookToken: string }>>(Endpoints.User.BookToken, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem(TOKEN) as string,
+    },
+  });

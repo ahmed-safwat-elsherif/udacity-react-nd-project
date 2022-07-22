@@ -1,11 +1,19 @@
 import { AxiosResponse } from 'axios';
-import { createContext, PropsWithChildren, useCallback, useEffect, useMemo, useState } from 'react';
+import {
+  createContext,
+  PropsWithChildren,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { getUserInfo } from '../api/auth';
 import { getAllBooks, updateBookShelf } from '../api/books';
 import { BookShelfEnum } from '../enums/book-status.enum';
 import { Book, BookShelfValues } from '../models/book.models';
 import { User } from '../models/user.model';
-import { TOKEN } from './AuthContext';
+import { AuthContext } from './AuthContext';
 
 export type BooksContextType = {
   user: User;
@@ -31,23 +39,34 @@ export const BooksContext = createContext<BooksContextType>({} as BooksContextTy
 export const BooksContextProvider = ({ children }: PropsWithChildren<{}>) => {
   const [books, setBooks] = useState<Book[]>([]);
   const [user, setUser] = useState<User>({} as User);
-
+  const { isLoggedIn, presistedBookToken: booksToken } = useContext(AuthContext);
   useEffect(() => {
-    if (localStorage.getItem(TOKEN)) {
-      Promise.all([getUserInfo(), getAllBooks()])
-        .then(([userInfoRes, booksInfoRes]) => {
-          setUser(userInfoRes.data.user);
-          setBooks(booksInfoRes.data.books);
+    if (isLoggedIn) {
+      getUserInfo()
+        .then(res => {
+          setUser(res.data.user);
         })
         .catch(err => {
           setUser({} as User);
-          setBooks([]);
         });
       return;
     }
     setUser({} as User);
+  }, [isLoggedIn]);
+
+  useEffect(() => {
+    if (booksToken) {
+      getAllBooks()
+        .then(res => {
+          setBooks(res.data.books);
+        })
+        .catch(err => {
+          setBooks([]);
+        });
+      return;
+    }
     setBooks([]);
-  }, []);
+  }, [booksToken]);
 
   const removeBook: BooksContextType['removeBook'] = useCallback(
     book => {

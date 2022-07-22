@@ -60,8 +60,22 @@ const getUserInfo = async (req, res) => {
   }
 };
 
+const getGeneratedBookToken = async (req, res) => {
+  try {
+    const user = await req.user;
+    const generatedBookToken = await user.generatedBookToken();
+    return res.status(201).send({ bookToken: generatedBookToken });
+  } catch (error) {
+    return res.status(401).send({
+      logError: error,
+      message: "Unable to get user presisted book token",
+    });
+  }
+};
+
 module.exports = {
   createAccount,
   login,
   getUserInfo,
+  getGeneratedBookToken,
 };

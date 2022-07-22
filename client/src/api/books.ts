@@ -1,15 +1,15 @@
 import axiosBase, { AxiosResponse } from 'axios';
-import { TOKEN } from '../contexts/AuthContext';
+import { PERSISTED_BOOK_TOKEN } from '../contexts/AuthContext';
 import { Book, BookShelfValues } from '../models/book.models';
 import { Endpoints } from './config';
 
 const BookBaseUrl = 'https://reactnd-books-api.udacity.com';
 
-const token = localStorage.getItem(TOKEN);
+const persistedBookToken = localStorage.getItem(PERSISTED_BOOK_TOKEN);
 
 const headers: HeadersInit = {
   Accept: 'application/json',
-  Authorization: token as string,
+  Authorization: persistedBookToken as string,
 };
 
 const axios = axiosBase.create({

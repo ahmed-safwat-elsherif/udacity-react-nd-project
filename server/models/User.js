@@ -7,6 +7,7 @@ const UserSchema = new Schema(
     username: { type: String, unique: true },
     hashedPass: String,
     salt: String,
+    presistedBookToken: String,
   },
   {
     timestamps: true,
@@ -36,6 +37,13 @@ const UserSchema = new Schema(
       verifyJWT(token) {
         const privateKey = process.env.JWT_PRIVATE_KEY;
         return jwt.verify(token, privateKey);
+      },
+      async generatedBookToken() {
+        if (!this.presistedBookToken) {
+          this.presistedBookToken = Math.random().toString(36).substring(-8);
+        }
+        await this.save();
+        return this.presistedBookToken;
       },
     },
   }

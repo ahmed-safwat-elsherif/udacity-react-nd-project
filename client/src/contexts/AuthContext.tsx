@@ -1,9 +1,10 @@
 import { AxiosResponse } from 'axios';
 import { createContext, PropsWithChildren, useCallback, useEffect, useMemo, useState } from 'react';
-import { LoginParams, login as loginAxios } from '../api/auth';
+import { LoginParams, login as loginAxios, getBookToken } from '../api/auth';
 
 export type AuthContextType = {
   isLoggedIn: boolean;
+  presistedBookToken?: string;
   logout: () => void;
   login: (params: LoginParams, { onSuccess, onError, onFinally }: LoginOptions) => void;
 };
@@ -17,21 +18,22 @@ export type LoginOptions = {
 export const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 export const TOKEN = 'token';
+export const PERSISTED_BOOK_TOKEN = 'presistedBookToken';
 
 export const AuthContextProvider = ({ children }: PropsWithChildren<{}>) => {
   const [token, setToken] = useState(() => localStorage.getItem(TOKEN) || undefined);
-  const [isLoggedIn, setIsLoggedIn] = useState(() => !!localStorage.getItem(TOKEN));
+  const [presistedBookToken, setPresistedBookToken] = useState<
+    AuthContextType['presistedBookToken']
+  >(() => localStorage.getItem(PERSISTED_BOOK_TOKEN) || undefined);
 
   const saveToken = useCallback((token: string) => {
     setToken(token);
     localStorage.setItem(TOKEN, token);
-    setIsLoggedIn(true);
   }, []);
 
   const removeToken = useCallback(() => {
     setToken(undefined);
     localStorage.removeItem(TOKEN);
-    setIsLoggedIn(false);
   }, []);
 
   const login: AuthContextType['login'] = useCallback(
@@ -49,15 +51,30 @@ export const AuthContextProvider = ({ children }: PropsWithChildren<{}>) => {
     [saveToken]
   );
 
+  useEffect(() => {
+    if (token) {
+      getBookToken()
+        .then(res => {
+          setPresistedBookToken(res.data.bookToken);
+          localStorage.setItem(PERSISTED_BOOK_TOKEN, res.data.bookToken);
+        })
+        .catch(err => console.log(err));
+    } else {
+      setPresistedBookToken(undefined);
+      localStorage.removeItem(PERSISTED_BOOK_TOKEN);
+    }
+  }, [token]);
+
   const logout: AuthContextType['logout'] = useCallback(() => removeToken(), [removeToken]);
 
   const contextValues: AuthContextType = useMemo(
     () => ({
       login,
-      isLoggedIn,
+      isLoggedIn: !!token,
       logout,
+      presistedBookToken,
     }),
-    [login, isLoggedIn, logout]
+    [login, token, logout, presistedBookToken]
   );
 
   return <AuthContext.Provider value={contextValues}>{children}</AuthContext.Provider>;
